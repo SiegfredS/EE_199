@@ -1,0 +1,134 @@
+{% extends 'bootstrap/base.html' %}
+{% import "bootstrap/wtf.html" as wtf %}
+
+{% block content %}
+{% include "header.html" %}
+
+
+<header class="masthead" style="background-image: url('https://upd.edu.ph/wp-content/uploads/2020/06/EEEI-from-LinkedIn.jpg')">
+    <div class="container text-center h-100% p-5">
+        <h1 class="display-1 text-white fw-bold p-5 m-5">
+            EEE 199: UNDERGRADUATE CAPSTONE PROJECT
+        </h1>
+        <h2 class="text-white fw-semibold p-5 m-5">
+            A Web-based Forecasting Tool for Hourly Rolling Average Locational Marginal Prices Through Supervised Machine
+Learning
+        </h2>
+        <h3 class="text-white p-5 m-5">
+            By: William Siegfred Sarita
+        </h3>
+    </div>
+</header>
+
+<div class="container province p-5 text-center">
+    <h1>Select a location</h1>
+    <h2>This module uses the weather station nearest to your input location</h2>
+    <div class="row p-5">
+        <div class="container col-lg-2">
+            Some suggestions:
+            <ul>
+                <li>Location: Cabanatuan <br> Node: 01CBNTU_SS</li>
+                <li>Location: Balintawak <br> Node: 02BALNT_T1L1</li>
+                <li>Location: Tuguegarao <br> Node: 01TGEGA_SS</li>
+                <li>Location: Laguna (Caliraya is located in Laguna) <br> Node: 03CALIRY_SS1 (there are 2 nodes) </li>
+                <li>Location: Naga Cebu (There is Naga in Cam Norte) <br> Node: 05NAGA_T1L1</li>
+                <li>Location: Sultan Kudarat <br> Node: 14SKU_T1L1</li>
+            </ul>
+            Also, Always add "Philippines"
+        </div>
+    </div>
+
+    <h2>
+        <div class="row p-5">
+            <div class="container col-lg-3">
+                <p>
+                </p>
+                {{wtf.quick_form(info_form, novalidate=True)}}
+            </div>
+        </div>
+    </h2>
+
+    <div class="row p-5">
+        <div class="container col-lg-12">
+            {{fig_html|safe}}
+        </div>
+    </div>
+    <div class="row p-5">
+        <div class="card">
+            {{weather_graph_html|safe}}
+          <div class="card-body">
+            <p class="card-text">Weather Data</p>
+          </div>
+        </div>
+    </div>
+    <div class="row p-5">
+        <div class="container col-lg-12">
+            {{node_graph_html|safe}}
+        </div>
+    </div>
+    <h2>
+        Time-Series Plot of {{selected_model}}
+    </h2>
+    <div class="row p-6">
+        <div class="container col-lg-12">
+            <img src="{{url_for('static', filename='images/time_series_plot.png')}}" alt="Time Series Plot">
+        </div>
+    </div>
+    <h2>
+        Feature Importance for {{selected_model}}
+    </h2>
+    <div class="row p-8">
+        <div class="container col-lg-8">
+            <img src="{{url_for('static', filename='images/feat_imp_specific.png')}}" alt="Feature Importance">
+        </div>
+    </div>
+    <h2>
+        Error Metrics Heatmap
+    </h2>
+    <div class="row p-10" style="height:500px;">
+        <div class="container col-lg-6">
+            <img src="{{url_for('static', filename='images/heatmap_Train.png')}}" alt="Train Error Heatmap">
+        </div>
+        <div class="container col-lg-6">
+            <img src="{{url_for('static', filename='images/heatmap_Cross.png')}}" alt="Cross Error Heatmap">
+        </div>
+    </div>
+    <div class="row p-10" style="height: 500px;">
+        <div class="container col-lg-6">
+            <img src="{{url_for('static', filename='images/heatmap_Test.png')}}" alt="Test Error Heatmap">
+        </div>
+    </div>
+    <h2>
+        Runtime for Each Model
+    </h2>
+    <div class="row p-6">
+<!--        <div class="container col-lg-6">-->
+<!--            {{html_time_table|safe}}-->
+<!--        </div>-->
+        <div class="container col-lg-8">
+            <img src="{{url_for('static', filename='images/elapsed_time.png')}}" alt="Runtime">
+        </div>
+    </div>
+    <h2>
+        Feature Importance Heatmap for All Models
+        <div class="row p-8">
+            <div class="container col-lg-10">
+                <img src="{{url_for('static', filename='images/feat_importance_heatmap.png')}}" alt="Feat Importance Heatmap">
+            </div>
+        </div>
+    </h2>
+    <h2>
+        KDE Plot for All Models
+        <div class="row p-10" style="height: 350px;">
+            <div class="container col-lg-6">
+                <img src="{{url_for('static', filename='images/kde_plot.png')}}" alt="kde plot">
+            </div>
+        </div>
+    </h2>
+
+</div>
+
+
+
+{% include "footer.html" %}
+{% endblock %}

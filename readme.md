@@ -21,6 +21,11 @@ The explanations of the different files are shown below.
 For more information on the project, please refer to the
 project manuscript.
 
+Further developments (post-graduation) of this project 
+could include the addition of more machine learning models
+that cater for the distribution of the data. 
+This project is also planned to be published in the future.
+
 ## cleaner.py
 
 This file cleans the static folder which contains the 
